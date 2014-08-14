@@ -1,0 +1,10 @@
+
+libdir = @CMAKE_INSTALL_PREFIX@/lib
+includedir = @CMAKE_INSTALL_PREFIX@/include/sxf
+
+Name: sxf
+Description: Драйвер для чтения SXF / MTR / RSC
+Version: 1.0
+Libs: -L@CMAKE_INSTALL_PREFIX@/lib -lsxf
+Cflags: -I@CMAKE_INSTALL_PREFIX@/include/sxf -Wall -std=gnu++11
+
