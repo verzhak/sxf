@@ -34,6 +34,6 @@ target_link_libraries(test sxf ${PC_AMV_LIBRARIES})
 
 configure_file(sxf.pc.in sxf.pc)
 install(TARGETS sxf DESTINATION lib)
-install(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR} DESTINATION include/sxf FILES_MATCHING PATTERN "*.hpp" PATTERN "build" EXCLUDE PATTERN ".git" EXCLUDE PATTERN "lib" EXCLUDE)
+install(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR} DESTINATION include FILES_MATCHING PATTERN "*.hpp" PATTERN "build" EXCLUDE PATTERN ".git" EXCLUDE PATTERN "lib" EXCLUDE)
 install(FILES ${CMAKE_CURRENT_BINARY_DIR}/sxf.pc DESTINATION lib/pkgconfig)
 
