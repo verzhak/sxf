@@ -10,21 +10,30 @@ CXXC = $(BIN_BASE)/mips-linux-gnu-g++
 LD = $(BIN_BASE)/mips-linux-gnu-gcc
 AR = $(BIN_BASE)/mips-linux-gnu-ar
 
-LIBS = -lm
 CFLAGS = -Wall -march=xlp -O3 -mplt -std=c++11 -shared -fPIC
-LDFLAGS = -L$(BROOT)/usr/lib/ -lamv -liconv
+LDFLAGS = -L$(BROOT)/usr/lib/ -lm -lamv -liconv
 INCLUDE_DIRS = \
 	-Wno-poison-system-directories\
 	-I. -I$(BROOT)/usr/include/ -I$(BROOT)/usr/include/libdrm/
 SRC = \
 	lib/sxf.cpp lib/sxf_map.cpp lib/sxf_height_map.cpp lib/file.cpp lib/codepage.cpp lib/map.cpp lib/point.cpp
 
-OUTPUT_DIR = $(BROOT)/usr/lib/
-OUTPUT_FNAME = ${OUTPUT_DIR}/libsxf.so
+PREFIX = $(BROOT)/usr/
+BUILD_DIR = build/
+OUTPUT_FNAME = libsxf.so
+INCLUDES_TO_INSTALL = file.hpp map.hpp point.hpp sxf.hpp
 
 release: clean
 
-	$(CXXC) $(CFLAGS) $(INCLUDE_DIRS) $(SRC) $(LIBS) $(LDFLAGS) -o $(OUTPUT_FNAME)
+	mkdir -p $(BUILD_DIR)
+
+	$(CXXC) $(CFLAGS) $(INCLUDE_DIRS) $(SRC) $(LDFLAGS) -o $(BUILD_DIR)/$(OUTPUT_FNAME)
+
+install: release
+
+	cp $(BUILD_DIR)/$(OUTPUT_FNAME) $(PREFIX)/lib
+	mkdir -p $(PREFIX)/include/sxf
+	cp $(INCLUDES_TO_INSTALL) $(PREFIX)/include/sxf
 
 clean:
 
