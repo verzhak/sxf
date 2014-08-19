@@ -29,8 +29,8 @@ set(sources lib/sxf.cpp lib/sxf_map.cpp lib/sxf_height_map.cpp lib/file.cpp lib/
 add_library(sxf SHARED ${sources})
 target_link_libraries(sxf m ${PC_AMV_LIBRARIES} ${PC_ICONV_LIBRARIES})
 
-add_executable(test test.cpp)
-target_link_libraries(test sxf ${PC_AMV_LIBRARIES})
+add_executable(sxf_test test.cpp)
+target_link_libraries(sxf_test sxf ${PC_AMV_LIBRARIES})
 
 configure_file(sxf.pc.in sxf.pc)
 install(TARGETS sxf DESTINATION lib)
